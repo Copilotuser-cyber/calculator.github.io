@@ -3,209 +3,88 @@
 <head>
     <title>Math Learning Tool</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f0f2f5;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            padding: 20px;
-        }
-        .calculator {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            width: 300px;
-            padding: 20px;
-        }
-        .display {
-            background: #f8f9fa;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 15px;
-            margin-bottom: 15px;
-            text-align: right;
-            font-size: 24px;
-            height: 30px;
-        }
-        .buttons {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
-        button {
-            border: none;
-            padding: 15px;
-            font-size: 18px;
-            border-radius: 5px;
-            cursor: pointer;
-            background: #e9ecef;
-            transition: all 0.2s;
-        }
-        button:hover {
-            background: #dee2e6;
-        }
-        .operator {
-            background: #4dabf7;
-            color: white;
-        }
-        .equals {
-            background: #40c057;
-            color: white;
-            grid-column: span 2;
-        }
-        #passwordPortal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.5);
-            z-index: 100;
-            justify-content: center;
-            align-items: center;
-        }
-        #passwordBox {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 300px;
-        }
-        #gamePortal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-            z-index: 200;
-        }
-        #exitBtn {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            z-index: 300;
-            background: red;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            font-size: 20px;
-            cursor: pointer;
-            display: none;
-        }
+        /* ... (keep all previous CSS styles) ... */
     </style>
 </head>
 <body>
-    <div class="calculator">
-        <div class="display" id="display">0</div>
-        <div class="buttons">
-            <button onclick="clearDisplay()">C</button>
-            <button onclick="backspace()">⌫</button>
-            <button onclick="appendToDisplay('%')">%</button>
-            <button class="operator" onclick="appendToDisplay('/')">÷</button>
-            <button onclick="appendToDisplay('7')">7</button>
-            <button onclick="appendToDisplay('8')">8</button>
-            <button onclick="appendToDisplay('9')">9</button>
-            <button class="operator" onclick="appendToDisplay('*')">×</button>
-            <button onclick="appendToDisplay('4')">4</button>
-            <button onclick="appendToDisplay('5')">5</button>
-            <button onclick="appendToDisplay('6')">6</button>
-            <button class="operator" onclick="appendToDisplay('-')">-</button>
-            <button onclick="appendToDisplay('1')">1</button>
-            <button onclick="appendToDisplay('2')">2</button>
-            <button onclick="appendToDisplay('3')">3</button>
-            <button class="operator" onclick="appendToDisplay('+')">+</button>
-            <button onclick="appendToDisplay('0')">0</button>
-            <button onclick="appendToDisplay('.')">.</button>
-            <button class="equals" onclick="calculate()">=</button>
-        </div>
-    </div>
-
-    <div id="passwordPortal">
-        <div id="passwordBox">
-            <h2>Teacher Verification</h2>
-            <p>Enter access code:</p>
-            <input type="password" id="passwordInput" style="width:100%; padding:10px; margin:10px 0;">
-            <button onclick="checkPassword()" style="width:100%; padding:10px; background:#4dabf7; color:white; border:none; border-radius:5px;">Submit</button>
-            <p id="errorMsg" style="color:red; display:none;">Incorrect code</p>
-        </div>
-    </div>
-
-    <iframe id="gamePortal"></iframe>
-    <button id="exitBtn" onclick="exitGame()">✕</button>
+    <!-- ... (keep all previous HTML) ... -->
 
     <script>
-        // Calculator Logic
-        let currentInput = '0';
-        let secretSequence = '';
-        const secretCode = '66+99+6677';
-        const PASSWORD1 = 'dEep-seEk'; // Goes to virlan.co
-        const PASSWORD2 = 'seEk-dEep'; // Goes to crazygames.com
+        // ... (keep all previous calculator functions) ...
 
-        function updateDisplay() {
-            document.getElementById('display').textContent = currentInput;
-        }
-
-        function appendToDisplay(value) {
-            if (currentInput === '0' && value !== '.') {
-                currentInput = value;
-            } else {
-                currentInput += value;
-            }
-            updateDisplay();
-            
-            secretSequence = (secretSequence + value).slice(-secretCode.length);
-            if (secretSequence === secretCode) {
-                document.getElementById('passwordPortal').style.display = 'flex';
-                secretSequence = '';
-                currentInput = '0';
-                updateDisplay();
-            }
-        }
-
-        function clearDisplay() {
-            currentInput = '0';
-            updateDisplay();
-        }
-
-        function backspace() {
-            currentInput = currentInput.slice(0, -1) || '0';
-            updateDisplay();
-        }
-
-        function calculate() {
-            try {
-                currentInput = eval(currentInput).toString();
-            } catch {
-                currentInput = 'Error';
-            }
-            updateDisplay();
-        }
-
-        // Password Logic
+        // Updated Password Logic
         function checkPassword() {
             const input = document.getElementById('passwordInput').value;
             const iframe = document.getElementById('gamePortal');
             const exitBtn = document.getElementById('exitBtn');
             
-            if (input === PASSWORD1) {
-                // Load virlan.co
-                iframe.src = 'https://virlan.co/unblocked-games/';
-                showGamePortal();
+            if (input === 'dEep-seEk') {
+                // Load virlan.co with iframe fallback
+                loadGameSite('https://virlan.co/unblocked-games/');
             } 
-            else if (input === PASSWORD2) {
-                // Load crazygames.com
-                iframe.src = 'https://www.crazygames.com/';
-                showGamePortal();
+            else if (input === 'seEk-dEep') {
+                // Load crazygames.com with alternative method
+                loadCrazyGames();
             }
             else {
                 document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+
+        function loadGameSite(url) {
+            const iframe = document.getElementById('gamePortal');
+            iframe.src = url;
+            showGamePortal();
+            
+            // Fallback if iframe is blocked
+            setTimeout(() => {
+                if (!iframe.contentWindow || 
+                    iframe.contentWindow.location.href === 'about:blank') {
+                    iframe.srcdoc = `
+                        <!DOCTYPE html>
+                        <html>
+                        <head>
+                            <meta http-equiv="refresh" content="0;url=${url}">
+                        </head>
+                        <body>
+                            <p>Loading resources...</p>
+                        </body>
+                        </html>
+                    `;
+                }
+            }, 2000);
+        }
+
+        function loadCrazyGames() {
+            const iframe = document.getElementById('gamePortal');
+            
+            // CrazyGames blocks iframes, so we need alternative methods
+            try {
+                // Method 1: Try to open in new tab
+                window.open('https://www.crazygames.com', '_blank');
+                
+                // Method 2: If popup blocked, show direct link
+                setTimeout(() => {
+                    if (!iframe.contentWindow || 
+                        !iframe.contentWindow.location.href.includes('crazygames')) {
+                        iframe.srcdoc = `
+                            <!DOCTYPE html>
+                            <html>
+                            <body style="background:#f0f2f5; display:flex; justify-content:center; align-items:center; height:100vh;">
+                                <div style="text-align:center;">
+                                    <p>CrazyGames cannot be embedded</p>
+                                    <a href="https://www.crazygames.com" target="_blank" style="background:#4dabf7; color:white; padding:10px 20px; border-radius:5px; text-decoration:none;">
+                                        Click to open CrazyGames
+                                    </a>
+                                </div>
+                            </body>
+                            </html>
+                        `;
+                        showGamePortal();
+                    }
+                }, 1000);
+            } catch(e) {
+                console.error("Error loading CrazyGames:", e);
             }
         }
 
@@ -217,17 +96,7 @@
             document.getElementById('passwordInput').value = '';
         }
 
-        function exitGame() {
-            document.getElementById('gamePortal').style.display = 'none';
-            document.getElementById('exitBtn').style.display = 'none';
-        }
-
-        // Initialize calculator buttons
-        document.querySelectorAll('.buttons button:not(.function):not(.operator):not(.equals)').forEach(button => {
-            button.addEventListener('click', function() {
-                appendToDisplay(this.textContent);
-            });
-        });
+        // ... (keep other functions) ...
     </script>
 </body>
 </html>
